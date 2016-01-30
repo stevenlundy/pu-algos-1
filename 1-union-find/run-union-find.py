@@ -1,4 +1,4 @@
-from quickfind import UF
+from quickunion import UF
 
 uf = UF(10)
 uf.union(4, 3)
