@@ -21,6 +21,7 @@ class UF:
   def getRoot(self, p):
     height = 0
     while self.id[p] != p:
+      self.id[p] = self.id[self.id[p]]
       p = self.id[p]
       height += 1
     return p, height
