@@ -35,9 +35,5 @@ class PercolationSimulation:
   def run_simulation(self):
     while not self.perc.percolates():
       self.open_next_block()
-    self.print_grid(self.visual_grid)
+    # self.print_grid(self.visual_grid)
     self.threshold = 1.0*self.open_sites/self.N**2
-
-
-sim = PercolationSimulation(20)
-print sim.threshold
