@@ -3,22 +3,31 @@ class Percolation:
   def __init__(self, N):
     self.N = N
     self.grid = []
+    self.open_grid = []
     # set virtual top
     self.grid.append([])
     self.grid[0].append((0, 0))
+    self.open_grid.append([])
+    self.open_grid[0].append(1)
+
     # set grid
     for i in range(1, N + 1):
       self.grid.append([])
+      self.open_grid.append([])
       for j in range(N):
         self.grid[i].append((i, j))
+        self.open_grid[i].append(0)
     # set virtual bottom
     self.grid.append([])
     self.grid[N + 1].append((N + 1, 0))
+    self.open_grid.append([])
+    self.open_grid[N + 1].append(1)
 
   def isOpen(self, i, j):
-    return self.grid[i][j] != (i, j)
+    return self.open_grid[i][j] == 1
 
   def open(self, i, j):
+    self.open_grid[i][j] = 1
     # connect up
     if i - 1 > 0 and self.isOpen(i - 1, j):
       self.connect(i, j, i - 1, j)
@@ -33,7 +42,7 @@ class Percolation:
     if j - 1 >= 0 and self.isOpen(i, j - 1):
       self.connect(i, j, i, j - 1)
     # connect right
-    if j + 1 < self.N and self.isOpen(i, j - 1):
+    if j + 1 < self.N and self.isOpen(i, j + 1):
       self.connect(i, j, i, j + 1)
 
   def percolates(self):
@@ -47,5 +56,4 @@ class Percolation:
   def connect(self, p_i, p_j, q_i, q_j = 0):
     p_root = self.getRoot(p_i, p_j)
     q_root = self.getRoot(q_i, q_j)
-
     self.grid[p_root[0]][p_root[1]] = q_root
