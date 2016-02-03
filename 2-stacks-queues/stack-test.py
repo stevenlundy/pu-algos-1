@@ -1,6 +1,6 @@
-from stack import Stack
+from stack_array import Stack
 
-s = Stack()
+s = Stack(10)
 
 print s.pop() # None
 s.push('to')
