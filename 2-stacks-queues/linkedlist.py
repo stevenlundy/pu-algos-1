@@ -3,6 +3,18 @@ class Linkedlist:
     self.head = None
     self.tail = None
 
+  def __iter__(self):
+    self.current = self.head
+    return self
+
+  def next(self):
+    if self.current == None:
+      raise StopIteration
+    else:
+      value = self.current.value
+      self.current = self.current.next
+      return value
+
   def remove_head(self):
     if self.head:
       item = self.head
