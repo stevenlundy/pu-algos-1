@@ -60,8 +60,16 @@ class Deque:
       self.length -= 1
 
   def __iter__(self):
+    self.current = self.front
+    return self
 
   def next(self):
+    if self.current == None:
+      raise StopIteration
+    else:
+      current = self.current
+      self.current = self.current.next
+      return current.value
 
 class Node:
   def __init__(self, value):
