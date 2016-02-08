@@ -16,24 +16,22 @@ class Deque:
   def add_first(self, item):
     '''add the item to the front'''
     self.length += 1
-    node = Node(item)
+    node = Node(item, next=self.front)
     if self.front != None:
       self.front.prev = node
-      node.next = self.front
     else:
       node.end = node
-    node.front = node
+    self.front = node
 
   def add_last(self, item):
     '''add the item to the end'''
     self.length += 1
-    node = Node(item)
+    node = Node(item, prev=self.end)
     if self.end != None:
       self.end.next = node
-      node.prev = self.end
     else:
       node.front = node
-    node.end = node
+    self.end = node
 
   def remove_first(self):
     '''remove and return the item from the front'''
@@ -72,7 +70,7 @@ class Deque:
       return current.value
 
 class Node:
-  def __init__(self, value):
+  def __init__(self, value, next=None, prev=None):
     self.value = value
-    self.next = None
-    self.prev = None
+    self.next = next
+    self.prev = prev
