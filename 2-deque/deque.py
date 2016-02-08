@@ -20,7 +20,7 @@ class Deque:
     if self.front != None:
       self.front.prev = node
     else:
-      node.end = node
+      self.end = node
     self.front = node
 
   def add_last(self, item):
@@ -30,7 +30,7 @@ class Deque:
     if self.end != None:
       self.end.next = node
     else:
-      node.front = node
+      self.front = node
     self.end = node
 
   def remove_first(self):
