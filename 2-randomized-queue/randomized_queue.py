@@ -22,7 +22,7 @@ class Randomized_Queue:
     if self.end != None:
       self.end.next = node
     else:
-      node.front = node
+      self.front = node
     self.end = node
 
   def get_node(self, index):
@@ -54,10 +54,13 @@ class Randomized_Queue:
 
   def __iter__(self):
     '''return an independent iterator over items in random order'''
-    return self
-
-  def next(self):
-    return self
+    values = []
+    current = self.front
+    while current != None:
+      values.append(current.value)
+      current = current.next
+    shuffle(values)
+    return iter(values)
 
 class Node:
   def __init__(self, value):
