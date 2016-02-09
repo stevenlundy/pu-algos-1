@@ -15,14 +15,24 @@ def get_polar_angle(origin, point):
   else:
     return atan(dy/dx)
 
+def is_ccw(a, b, c):
+  area = (b[0] - a[0])*(c[1] - a[1]) - (b[1] - a[1])*(c[0] - a[0])
+  return area > 0
+
 def convex_hull(points):
   points.sort(key=lambda point: point[1])
   origin = points[0]
   points.sort(key=lambda point: get_polar_angle(origin, point))
-  print points
+  hull_points = []
+  hull_points.append(points[0])
+  hull_points.append(points[1])
+  for i in range(2, len(points)):
+    hull_points.append(points[i])
+    while not is_ccw(*hull_points[-3:]):
+      del hull_points[-2]
+  return hull_points
 
-
-convex_hull([
+print convex_hull([
   (0, 1),
   (1, 6),
   (1, 3),
